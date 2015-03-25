@@ -1,0 +1,386 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		115394991AB9A9B20054D77C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 115394981AB9A9B20054D77C /* main.m */; };
+		1153949C1AB9A9B20054D77C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1153949B1AB9A9B20054D77C /* AppDelegate.m */; };
+		1153949F1AB9A9B20054D77C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1153949E1AB9A9B20054D77C /* ViewController.m */; };
+		115394A21AB9A9B20054D77C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 115394A01AB9A9B20054D77C /* Main.storyboard */; };
+		115394A41AB9A9B20054D77C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 115394A31AB9A9B20054D77C /* Images.xcassets */; };
+		115394A71AB9A9B20054D77C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115394A51AB9A9B20054D77C /* LaunchScreen.xib */; };
+		115394DB1AB9AD2A0054D77C /* DFNettyChatClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 115394DA1AB9AD2A0054D77C /* DFNettyChatClient.m */; };
+		115394DC1AB9ADDF0054D77C /* libnetty-common-client.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 115394C31AB9AA060054D77C /* libnetty-common-client.a */; };
+		115394E11AB9AFD70054D77C /* DataPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 115394E01AB9AFD70054D77C /* DataPackage.m */; };
+		115394E31AB9B1210054D77C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115394E21AB9B1210054D77C /* CFNetwork.framework */; };
+		115394E51AB9B1720054D77C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115394E41AB9B1720054D77C /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		115394C21AB9AA060054D77C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 115394BE1AB9AA060054D77C /* netty-common-client.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 115394701AB9A96B0054D77C;
+			remoteInfo = "netty-common-client";
+		};
+		115394DD1AB9ADF00054D77C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 115394BE1AB9AA060054D77C /* netty-common-client.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 1153946F1AB9A96B0054D77C;
+			remoteInfo = "netty-common-client";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		115394931AB9A9B20054D77C /* netty-chat-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netty-chat-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		115394971AB9A9B20054D77C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		115394981AB9A9B20054D77C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1153949A1AB9A9B20054D77C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1153949B1AB9A9B20054D77C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1153949D1AB9A9B20054D77C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1153949E1AB9A9B20054D77C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		115394A11AB9A9B20054D77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		115394A31AB9A9B20054D77C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		115394A61AB9A9B20054D77C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		115394BE1AB9AA060054D77C /* netty-common-client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "netty-common-client.xcodeproj"; path = "../netty-common-client-objc/netty-common-client.xcodeproj"; sourceTree = "<group>"; };
+		115394D91AB9AD2A0054D77C /* DFNettyChatClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DFNettyChatClient.h; sourceTree = "<group>"; };
+		115394DA1AB9AD2A0054D77C /* DFNettyChatClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DFNettyChatClient.m; sourceTree = "<group>"; };
+		115394DF1AB9AFD70054D77C /* DataPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataPackage.h; sourceTree = "<group>"; };
+		115394E01AB9AFD70054D77C /* DataPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataPackage.m; sourceTree = "<group>"; };
+		115394E21AB9B1210054D77C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		115394E41AB9B1720054D77C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		115394901AB9A9B20054D77C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				115394E51AB9B1720054D77C /* SystemConfiguration.framework in Frameworks */,
+				115394E31AB9B1210054D77C /* CFNetwork.framework in Frameworks */,
+				115394DC1AB9ADDF0054D77C /* libnetty-common-client.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1153948A1AB9A9B20054D77C = {
+			isa = PBXGroup;
+			children = (
+				115394E41AB9B1720054D77C /* SystemConfiguration.framework */,
+				115394E21AB9B1210054D77C /* CFNetwork.framework */,
+				115394BE1AB9AA060054D77C /* netty-common-client.xcodeproj */,
+				115394951AB9A9B20054D77C /* netty-chat-client */,
+				115394941AB9A9B20054D77C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		115394941AB9A9B20054D77C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				115394931AB9A9B20054D77C /* netty-chat-client.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		115394951AB9A9B20054D77C /* netty-chat-client */ = {
+			isa = PBXGroup;
+			children = (
+				115394DF1AB9AFD70054D77C /* DataPackage.h */,
+				115394E01AB9AFD70054D77C /* DataPackage.m */,
+				1153949A1AB9A9B20054D77C /* AppDelegate.h */,
+				1153949B1AB9A9B20054D77C /* AppDelegate.m */,
+				1153949D1AB9A9B20054D77C /* ViewController.h */,
+				1153949E1AB9A9B20054D77C /* ViewController.m */,
+				115394A01AB9A9B20054D77C /* Main.storyboard */,
+				115394A31AB9A9B20054D77C /* Images.xcassets */,
+				115394A51AB9A9B20054D77C /* LaunchScreen.xib */,
+				115394961AB9A9B20054D77C /* Supporting Files */,
+				115394D91AB9AD2A0054D77C /* DFNettyChatClient.h */,
+				115394DA1AB9AD2A0054D77C /* DFNettyChatClient.m */,
+			);
+			path = "netty-chat-client";
+			sourceTree = "<group>";
+		};
+		115394961AB9A9B20054D77C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				115394971AB9A9B20054D77C /* Info.plist */,
+				115394981AB9A9B20054D77C /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		115394BF1AB9AA060054D77C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				115394C31AB9AA060054D77C /* libnetty-common-client.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		115394921AB9A9B20054D77C /* netty-chat-client */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 115394B61AB9A9B20054D77C /* Build configuration list for PBXNativeTarget "netty-chat-client" */;
+			buildPhases = (
+				1153948F1AB9A9B20054D77C /* Sources */,
+				115394901AB9A9B20054D77C /* Frameworks */,
+				115394911AB9A9B20054D77C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				115394DE1AB9ADF00054D77C /* PBXTargetDependency */,
+			);
+			name = "netty-chat-client";
+			productName = "netty-chat-client";
+			productReference = 115394931AB9A9B20054D77C /* netty-chat-client.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1153948B1AB9A9B20054D77C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Datafans Inc.";
+				TargetAttributes = {
+					115394921AB9A9B20054D77C = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 1153948E1AB9A9B20054D77C /* Build configuration list for PBXProject "netty-chat-client" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1153948A1AB9A9B20054D77C;
+			productRefGroup = 115394941AB9A9B20054D77C /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 115394BF1AB9AA060054D77C /* Products */;
+					ProjectRef = 115394BE1AB9AA060054D77C /* netty-common-client.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				115394921AB9A9B20054D77C /* netty-chat-client */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		115394C31AB9AA060054D77C /* libnetty-common-client.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libnetty-common-client.a";
+			remoteRef = 115394C21AB9AA060054D77C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		115394911AB9A9B20054D77C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				115394A21AB9A9B20054D77C /* Main.storyboard in Resources */,
+				115394A71AB9A9B20054D77C /* LaunchScreen.xib in Resources */,
+				115394A41AB9A9B20054D77C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1153948F1AB9A9B20054D77C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1153949F1AB9A9B20054D77C /* ViewController.m in Sources */,
+				1153949C1AB9A9B20054D77C /* AppDelegate.m in Sources */,
+				115394991AB9A9B20054D77C /* main.m in Sources */,
+				115394E11AB9AFD70054D77C /* DataPackage.m in Sources */,
+				115394DB1AB9AD2A0054D77C /* DFNettyChatClient.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		115394DE1AB9ADF00054D77C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "netty-common-client";
+			targetProxy = 115394DD1AB9ADF00054D77C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		115394A01AB9A9B20054D77C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				115394A11AB9A9B20054D77C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		115394A51AB9A9B20054D77C /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				115394A61AB9A9B20054D77C /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		115394B41AB9A9B20054D77C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		115394B51AB9A9B20054D77C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		115394B71AB9A9B20054D77C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILT_PRODUCTS_DIR)/include/**",
+				);
+				INFOPLIST_FILE = "netty-chat-client/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		115394B81AB9A9B20054D77C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(BUILT_PRODUCTS_DIR)/include/**",
+				);
+				INFOPLIST_FILE = "netty-chat-client/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1153948E1AB9A9B20054D77C /* Build configuration list for PBXProject "netty-chat-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				115394B41AB9A9B20054D77C /* Debug */,
+				115394B51AB9A9B20054D77C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		115394B61AB9A9B20054D77C /* Build configuration list for PBXNativeTarget "netty-chat-client" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				115394B71AB9A9B20054D77C /* Debug */,
+				115394B81AB9A9B20054D77C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1153948B1AB9A9B20054D77C /* Project object */;
+}
