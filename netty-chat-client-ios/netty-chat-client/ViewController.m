@@ -81,8 +81,8 @@
     }
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:@"10000" forKey:@"sid"];
-    [dic setObject:@"10000" forKey:@"rid"];
+    [dic setObject:@"100001" forKey:@"sid"];
+    [dic setObject:@"100001" forKey:@"rid"];
     [dic setObject:msg forKey:@"msg"];
     
     NSData *content = [[self dataTOjsonString:dic] dataUsingEncoding:NSUTF8StringEncoding];

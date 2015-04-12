@@ -32,6 +32,14 @@
 }
 
 
+-(void) connect:(NSString *) host port:(NSInteger) port
+{
+    _host = host;
+    _port = port;
+    [self start];
+}
+
+
 -(void) start
 {
     if (_status != CLOSED) {
@@ -41,7 +49,7 @@
     _hasMarkedRead = NO;
     
     NSError *error = nil;
-    [_socket connectToHost:@"112.124.28.196" onPort:50000 error:&error];
+    [_socket connectToHost:_host onPort:_port error:&error];
     
     [self setStatus:CONNECTING];
     
@@ -59,7 +67,7 @@
     [_socket disconnect];
     
 }
--(void) terminate
+-(void) disconnect
 {
     [self close];
     

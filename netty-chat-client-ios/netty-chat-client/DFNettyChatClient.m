@@ -37,7 +37,7 @@ static DFNettyChatClient *_client=nil;
     DataPackage *pkg = [DataPackage loginPackage];
     
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:@"10000" forKey:@"user_id"];
+    [dic setObject:@"560bc36658452b23ba8fc96ece5dfbfa" forKey:@"token"];
     NSData *content = [[self dataTOjsonString:dic] dataUsingEncoding:NSUTF8StringEncoding];
     pkg.content = content;
     

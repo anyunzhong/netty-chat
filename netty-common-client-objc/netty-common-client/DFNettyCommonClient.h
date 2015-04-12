@@ -34,9 +34,11 @@ typedef NS_ENUM(NSUInteger, CONNECTION_STATUS){
 @property (nonatomic,strong) NSTimer *autoSendHeartbeatTimer;
 @property (nonatomic,strong) NSTimer *heartbeatTimeoutCheckTimer;
 
+@property (nonatomic,strong) NSString *host;
+@property (nonatomic,assign) NSInteger port;
 
--(void) start;
--(void) terminate;
+-(void) connect:(NSString *) host port:(NSInteger) port;
+-(void) disconnect;
 
 -(void) write:(NSData *) data;
 
