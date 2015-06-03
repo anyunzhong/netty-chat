@@ -20,8 +20,7 @@ netty-chat-standalone: server启动类和业务逻辑处理相关 能独立提�
 netty-chat-client: 简单的基于java的客户端测试类
 
 
-
-＃ 几点说明
+# 几点说明
 
 1. 聊天服务端demo只是用来测试 生产环境需要做分布式 把连接和业务逻辑处理分到不同的实例
 
