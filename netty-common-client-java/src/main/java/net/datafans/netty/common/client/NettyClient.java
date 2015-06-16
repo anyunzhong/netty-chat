@@ -47,8 +47,8 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 
 	private boolean isTerminate = false;
 
-	private int restartTryTime = 0;
-	private int heartbeatFailTime = 0;
+	private int restartTryTimes = 0;
+	private int heartbeatFailTimes = 0;
 
 	protected NettyClient() {
 
@@ -64,10 +64,9 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 		state = ChannelState.CLOSED;
 
 		UncaughtExceptionUtil.declare();
-		
+
 		Shutdown.sharedInstance().addListener(shutdownListener);
-		
-		
+
 		setHandlerList(handlerList);
 
 		workGroup = new NioEventLoopGroup();
@@ -129,6 +128,8 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 
 	@Override
 	public void terminate() {
+		stop();
+
 		setTerminate(true);
 		workGroup.shutdownGracefully();
 		logger.info("WORKGROUP_SHUTDOWN_GRACEFULLY");
@@ -228,7 +229,7 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 			if (future.isSuccess()) {
 				logger.info("CHANNEL_OPENED " + channel);
 				state = ChannelState.RUNNING;
-				restartTryTime = 0;
+				restartTryTimes = 0;
 				channel = future.channel();
 			} else {
 				logger.error("CHANNEL_CONNECTION_ERROR " + future.cause());
@@ -253,12 +254,12 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 		public void operationComplete(ChannelFuture future) throws Exception {
 			if (future.isSuccess()) {
 				logger.info("AUTO_SEND_HEARTBEAT_DONE");
-				heartbeatFailTime = 0;
+				heartbeatFailTimes = 0;
 			} else {
 				logger.error("AUTO_SEND_HEARTBEAT_ERROR");
-				heartbeatFailTime++;
+				heartbeatFailTimes++;
 				// 心跳失败
-				if (heartbeatFailTime >= defaultHeartbeatSendFailThreshold()) {
+				if (heartbeatFailTimes >= defaultHeartbeatSendFailThreshold()) {
 					stop();
 				}
 			}
@@ -270,7 +271,7 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 		public void run() {
 
 			while (true) {
-				if (restartTryTime > autoReconnectTimesThreshold()) {
+				if (restartTryTimes > autoReconnectTimesThreshold()) {
 					logger.info("AUTO_RESTART_TERMINATE");
 					NettyClient.this.terminate();
 					break;
@@ -278,8 +279,8 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 				try {
 					Thread.sleep(1000);
 					if (state == ChannelState.CLOSED) {
-						restartTryTime++;
-						logger.info("AUTO_RESTART_TIME " + restartTryTime);
+						restartTryTimes++;
+						logger.info("AUTO_RESTART_TIME " + restartTryTimes);
 						NettyClient.this.start();
 					}
 				} catch (Exception e) {
@@ -323,19 +324,18 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 						break;
 					}
 					Thread.sleep(1000);
-					if (channel != null) {
-						Object o = channel.attr(AttributeKey.valueOf("session")).get();
-						if (o != null && o instanceof Session) {
-							Session session = (Session) o;
-							long interval = System.currentTimeMillis() - session.getLastActiveTime();
 
-							// 心跳超时
-							if (interval > defaultHeartbeatTimeout()) {
-								logger.info("AUTO_DETECT_HEARTBEAT_TIMEOUT");
-								stop();
-							}
+					Session session = getSession();
+					if (session != null) {
+						long interval = System.currentTimeMillis() - session.getLastActiveTime();
+
+						// 心跳超时
+						if (interval > defaultHeartbeatTimeout()) {
+							logger.info("AUTO_DETECT_HEARTBEAT_TIMEOUT");
+							stop();
 						}
 					}
+
 				} catch (Exception e) {
 					logger.error("AUTO_DETECT_HEARTBEAT_THREAD_EXCEPTION " + e);
 				}
@@ -343,7 +343,7 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 
 		}
 	};
-	
+
 	private ShutdownListener shutdownListener = new ShutdownListener() {
 
 		@Override
@@ -351,5 +351,27 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 			terminate();
 		}
 	};
+
+	private Session getSession() {
+
+		if (channel != null) {
+			Object o = channel.attr(AttributeKey.valueOf("session")).get();
+			if (o != null && o instanceof Session) {
+				Session session = (Session) o;
+				return session;
+			}
+		}
+
+		return null;
+	}
+
+	public void write(Object pkg) {
+		Session session = getSession();
+		if (session == null) {
+			return;
+		}
+
+		session.writeAndClose(pkg);
+	}
 
 }
