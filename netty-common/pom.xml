@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.datafans</groupId>
 	<artifactId>netty-common</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.0</version>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -64,7 +64,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>5.0.0.Alpha1</version>
+			<version>5.0.0.Alpha2</version>
 		</dependency>
 		<!-- netty -->
 
