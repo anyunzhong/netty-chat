@@ -1,7 +1,7 @@
 # netty-chat
 
 
-# 工程说明
+# 模块说明
 
 netty-common: 服务端和java客户端公用基类
 
