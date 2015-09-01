@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.datafans</groupId>
+    <artifactId>netty-chat</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+    <modules>
+        <module>netty-common</module>
+        <module>netty-common-server</module>
+        <module>netty-common-client</module>
+        <module>netty-chat-common</module>
+        <module>netty-chat-standalone</module>
+        <module>netty-chat-client</module>
+    </modules>
+
+
+</project>

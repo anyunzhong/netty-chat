@@ -42,7 +42,7 @@ public abstract class NettyServer implements NettyLifecycle, NettyConfig {
 		try {
 			init();
 		} catch (Exception e) {
-			logger.error(e.toString());
+			logger.error("SERVER_INIT_ERROR",e);
 		}
 	}
 
@@ -80,7 +80,7 @@ public abstract class NettyServer implements NettyLifecycle, NettyConfig {
 			future.channel().closeFuture().sync();
 
 		} catch (Exception e) {
-			logger.error(e.toString());
+			logger.error("SERVER START ERROR", e);
 		}
 	}
 
@@ -136,6 +136,7 @@ public abstract class NettyServer implements NettyLifecycle, NettyConfig {
 		bootstrap.option(ChannelOption.ALLOCATOR, optionByteBufAllocator());
 		bootstrap.childOption(ChannelOption.ALLOCATOR, childOptionByteBufAllocator());
 		bootstrap.childOption(ChannelOption.SO_KEEPALIVE, childOptionSocketKeepAlive());
+		//bootstrap.childOption(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT);
 	}
 
 	protected int optionSocketBacklog() {

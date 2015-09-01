@@ -5,8 +5,16 @@
 
 target/
 
-*.xcworkspace
-xcuserdata/
+
+bin/
+
+
+.DS_Store
+
+.idea
+build/
+.gradle
+
 
 
 
