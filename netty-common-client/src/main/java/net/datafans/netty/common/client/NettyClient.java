@@ -371,7 +371,7 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 			return;
 		}
 
-		session.writeAndClose(pkg);
+		session.write(pkg);
 	}
 
 }

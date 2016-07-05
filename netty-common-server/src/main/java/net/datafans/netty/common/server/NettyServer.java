@@ -31,170 +31,169 @@ import org.slf4j.LoggerFactory;
 
 public abstract class NettyServer implements NettyLifecycle, NettyConfig {
 
-	private Logger logger = LoggerFactory.getLogger(NettyServer.class);
+    private Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
-	private EventLoopGroup bossGroup;
-	private EventLoopGroup workGroup;
-	private ServerBootstrap bootstrap;
-	private Channel channel;
+    private EventLoopGroup bossGroup;
+    private EventLoopGroup workGroup;
+    private ServerBootstrap bootstrap;
+    private Channel channel;
 
-	public NettyServer() {
-		try {
-			init();
-		} catch (Exception e) {
-			logger.error("SERVER_INIT_ERROR",e);
-		}
-	}
+    public NettyServer() {
+        try {
+            init();
+        } catch (Exception e) {
+            logger.error("SERVER_INIT_ERROR", e);
+        }
+    }
 
-	private void init() throws Exception {
+    private void init() throws Exception {
 
-		UncaughtExceptionUtil.declare();
+        UncaughtExceptionUtil.declare();
 
-		Shutdown.sharedInstance().addListener(shutdownListener);
+        Shutdown.sharedInstance().addListener(shutdownListener);
 
-		setHandlerList(handlerList);
+        setHandlerList(handlerList);
 
-		bossGroup = new NioEventLoopGroup();
-		workGroup = new NioEventLoopGroup();
+        bossGroup = new NioEventLoopGroup();
+        workGroup = new NioEventLoopGroup();
 
-		bootstrap = new ServerBootstrap();
-		bootstrap.group(bossGroup, workGroup);
-		bootstrap.channel(NioServerSocketChannel.class);
-		if (handlerList.isEmpty()) {
-			throw new Exception("HANDLER_LIST_EMPTY");
-		}
-		setBootstrapChildHandler(bootstrap, handlerList);
-		setBootstrapOption(bootstrap);
+        bootstrap = new ServerBootstrap();
+        bootstrap.group(bossGroup, workGroup);
+        bootstrap.channel(NioServerSocketChannel.class);
+        if (handlerList.isEmpty()) {
+            throw new Exception("HANDLER_LIST_EMPTY");
+        }
+        setBootstrapChildHandler(bootstrap, handlerList);
+        setBootstrapOption(bootstrap);
 
-	}
+    }
 
-	@Override
-	public void start() {
-		try {
-			if (getPort() <= 0) {
-				throw new Exception("LISTEN_PORT_ILLEGAL");
-			}
-			ChannelFuture future = bootstrap.bind(getPort()).sync();
-			future.addListener(startListener);
-			channel = future.channel();
-			future.channel().closeFuture().sync();
+    @Override
+    public void start() {
+        try {
+            if (getPort() <= 0) {
+                throw new Exception("LISTEN_PORT_ILLEGAL");
+            }
+            ChannelFuture future = bootstrap.bind(getPort()).sync();
+            future.addListener(startListener);
+            channel = future.channel();
+            future.channel().closeFuture().sync();
 
-		} catch (Exception e) {
-			logger.error("SERVER START ERROR", e);
-		}
-	}
+        } catch (Exception e) {
+            logger.error("SERVER START ERROR", e);
+        }
+    }
 
-	@Override
-	public void stop() {
-		if (channel != null) {
-			ChannelFuture future = channel.close();
-			future.addListener(stopListener);
-		}
-	}
+    @Override
+    public void stop() {
+        if (channel != null) {
+            ChannelFuture future = channel.close();
+            future.addListener(stopListener);
+        }
+    }
 
-	@Override
-	public void terminate() {
+    @Override
+    public void terminate() {
 
-		stop();
+        stop();
 
-		bossGroup.shutdownGracefully();
-		logger.info("BOSSGROUP_SHUTDOWN_GRACEFULLY");
+        bossGroup.shutdownGracefully();
+        logger.info("BOSSGROUP_SHUTDOWN_GRACEFULLY");
 
-		workGroup.shutdownGracefully();
-		logger.info("WORKGROUP_SHUTDOWN_GRACEFULLY");
+        workGroup.shutdownGracefully();
+        logger.info("WORKGROUP_SHUTDOWN_GRACEFULLY");
 
-	}
+    }
 
-	private void setBootstrapChildHandler(final ServerBootstrap bootstrap, final List<ChannelHandlerFactory> handlers) {
+    private void setBootstrapChildHandler(final ServerBootstrap bootstrap, final List<ChannelHandlerFactory> handlers) {
 
-		bootstrap.childHandler(new ChannelInitializer<Channel>() {
+        bootstrap.childHandler(new ChannelInitializer<Channel>() {
 
-			@Override
-			protected void initChannel(Channel ch) throws Exception {
+            @Override
+            protected void initChannel(Channel ch) throws Exception {
 
-				// 心跳检测
-				ch.pipeline().addLast(new ReadTimeoutHandler(defaultHeartbeatTimeout(), TimeUnit.MILLISECONDS));
+                // 心跳检测
+                ch.pipeline().addLast(new ReadTimeoutHandler(defaultHeartbeatTimeout(), TimeUnit.MILLISECONDS));
+                if (enableFrameDecoder()) {
+                    GlobalConfig.FrameDecoder config = new GlobalConfig.FrameDecoder();
+                    setFrameDecoderConfig(config);
+                    ch.pipeline().addLast(
+                            new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, config.getOffset(), config.getLength(),
+                                    config.getAdjustment(), 0));
+                }
 
-				if (enableFrameDecoder()) {
-					GlobalConfig.FrameDecoder config = new GlobalConfig.FrameDecoder();
-					setFrameDecoderConfig(config);
-					ch.pipeline().addLast(
-							new LengthFieldBasedFrameDecoder(Integer.MAX_VALUE, config.getOffset(), config.getLength(),
-									config.getAdjustment(), 0));
-				}
+                for (ChannelHandlerFactory factory : handlers) {
+                    ch.pipeline().addLast(factory.build());
+                }
+            }
+        });
+    }
 
-				for (ChannelHandlerFactory factory : handlers) {
-					ch.pipeline().addLast(factory.build());
-				}
-			}
-		});
-	}
+    private void setBootstrapOption(final ServerBootstrap bootstrap) {
 
-	private void setBootstrapOption(final ServerBootstrap bootstrap) {
+        bootstrap.option(ChannelOption.SO_BACKLOG, optionSocketBacklog());
+        bootstrap.option(ChannelOption.ALLOCATOR, optionByteBufAllocator());
+        bootstrap.childOption(ChannelOption.ALLOCATOR, childOptionByteBufAllocator());
+        bootstrap.childOption(ChannelOption.SO_KEEPALIVE, childOptionSocketKeepAlive());
+        //bootstrap.childOption(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT);
+    }
 
-		bootstrap.option(ChannelOption.SO_BACKLOG, optionSocketBacklog());
-		bootstrap.option(ChannelOption.ALLOCATOR, optionByteBufAllocator());
-		bootstrap.childOption(ChannelOption.ALLOCATOR, childOptionByteBufAllocator());
-		bootstrap.childOption(ChannelOption.SO_KEEPALIVE, childOptionSocketKeepAlive());
-		//bootstrap.childOption(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT);
-	}
+    protected int optionSocketBacklog() {
+        return 128;
+    }
 
-	protected int optionSocketBacklog() {
-		return 128;
-	}
+    protected ByteBufAllocator optionByteBufAllocator() {
+        return PooledByteBufAllocator.DEFAULT;
+    }
 
-	protected ByteBufAllocator optionByteBufAllocator() {
-		return PooledByteBufAllocator.DEFAULT;
-	}
+    protected ByteBufAllocator childOptionByteBufAllocator() {
+        return PooledByteBufAllocator.DEFAULT;
+    }
 
-	protected ByteBufAllocator childOptionByteBufAllocator() {
-		return PooledByteBufAllocator.DEFAULT;
-	}
+    protected boolean childOptionSocketKeepAlive() {
+        return true;
+    }
 
-	protected boolean childOptionSocketKeepAlive() {
-		return true;
-	}
+    protected boolean enableFrameDecoder() {
+        return false;
+    }
 
-	protected boolean enableFrameDecoder() {
-		return false;
-	}
+    protected long defaultHeartbeatTimeout() {
+        return Config.Server.DEFAULT_HEARTBEAT_TIMEOUT_MINISECONDS;
+    }
 
-	protected long defaultHeartbeatTimeout() {
-		return Config.Server.DEFAULT_HEARTBEAT_TIMEOUT_MINISECONDS;
-	}
+    protected void setFrameDecoderConfig(final GlobalConfig.FrameDecoder config) {
 
-	protected void setFrameDecoderConfig(final GlobalConfig.FrameDecoder config) {
+    }
 
-	}
+    private ChannelFutureListener startListener = new ChannelFutureListener() {
 
-	private ChannelFutureListener startListener = new ChannelFutureListener() {
+        @Override
+        public void operationComplete(ChannelFuture future) throws Exception {
+            if (future.isSuccess()) {
+                logger.info("SERVER_START_SUCCESSFULLY");
+            } else {
+                logger.error("SERVER_START_FAILED");
+            }
+        }
+    };
+    private ChannelFutureListener stopListener = new ChannelFutureListener() {
 
-		@Override
-		public void operationComplete(ChannelFuture future) throws Exception {
-			if (future.isSuccess()) {
-				logger.info("SERVER_START_SUCCESSFULLY");
-			} else {
-				logger.error("SERVER_START_FAILED");
-			}
-		}
-	};
-	private ChannelFutureListener stopListener = new ChannelFutureListener() {
+        @Override
+        public void operationComplete(ChannelFuture future) throws Exception {
+            if (future.isSuccess()) {
+                logger.info("SERVER_STOP_SUCCESSFULLY");
+            } else {
+                logger.error("SERVER_STOP_FAILED");
+            }
+        }
+    };
 
-		@Override
-		public void operationComplete(ChannelFuture future) throws Exception {
-			if (future.isSuccess()) {
-				logger.info("SERVER_STOP_SUCCESSFULLY");
-			} else {
-				logger.error("SERVER_STOP_FAILED");
-			}
-		}
-	};
+    private ShutdownListener shutdownListener = new ShutdownListener() {
 
-	private ShutdownListener shutdownListener = new ShutdownListener() {
-
-		@Override
-		public void shutdown() {
-			terminate();
-		}
-	};
+        @Override
+        public void shutdown() {
+            terminate();
+        }
+    };
 }

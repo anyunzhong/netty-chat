@@ -6,7 +6,7 @@ public class ByteUtil {
 		int result = 0;
 		byte bLoop;
 		for (int i = 0; i < arr.length; i++) {
-			bLoop = arr[i];
+			bLoop = arr[arr.length-1-i];
 			result += (bLoop & 0xFF) << (8 * i);
 		}
 		return result;
@@ -15,7 +15,7 @@ public class ByteUtil {
 	public static byte[] toByteArray(int value, int length) {
 		byte[] result = new byte[length];
 		for (int i = 0; (i < 4) && (i < length); i++) {
-			result[i] = (byte) (value >> 8 * i & 0xFF);
+			result[length-1-i] = (byte) (value >> 8 * i & 0xFF);
 		}
 		return result;
 	}
