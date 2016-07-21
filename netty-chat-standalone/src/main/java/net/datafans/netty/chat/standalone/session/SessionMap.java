@@ -20,7 +20,7 @@ public class SessionMap {
 
 	public void addSession(Integer uniqueId, Session session) {
 		map.put(uniqueId, session);
-		logger.info("SESSION_ADD " + uniqueId);
+		logger.info("SESSION_ADD " + uniqueId  +"   total: " +map.size());
 	}
 
 	public Session getSession(Integer uniqueId) {
@@ -32,7 +32,7 @@ public class SessionMap {
 			return;
 		}
 		map.remove(uniqueId);
-		logger.info("SESSION_REMOVED " + uniqueId);
+		logger.info("SESSION_REMOVED " + uniqueId+"   total: " +map.size());
 	}
 
 }

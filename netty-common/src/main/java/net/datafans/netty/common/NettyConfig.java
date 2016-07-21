@@ -7,7 +7,7 @@ import net.datafans.netty.common.handler.ChannelHandlerFactory;
 
 public interface NettyConfig {
 
-	final List<ChannelHandlerFactory> handlerList = new ArrayList<ChannelHandlerFactory>();
+	List<ChannelHandlerFactory> handlerList = new ArrayList<>();
 
 	void setHandlerList(final List<ChannelHandlerFactory> handlerList);
 

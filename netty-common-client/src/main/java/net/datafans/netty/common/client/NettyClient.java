@@ -14,6 +14,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.util.AttributeKey;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,6 +38,8 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 	private Logger logger = LoggerFactory.getLogger(NettyClient.class);
 
 	private Channel channel;
+
+	List<ChannelHandlerFactory> handlerList = new ArrayList<>();
 
 	private ExecutorService pool = Executors.newCachedThreadPool();
 
@@ -67,6 +70,7 @@ public abstract class NettyClient implements NettyLifecycle, NettyConfig {
 
 		Shutdown.sharedInstance().addListener(shutdownListener);
 
+		handlerList.clear();
 		setHandlerList(handlerList);
 
 		workGroup = new NioEventLoopGroup();
